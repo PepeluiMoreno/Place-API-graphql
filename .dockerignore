@@ -1,0 +1,12 @@
+# .dockerignore
+# Evita copiar archivos innecesarios a la imagen
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.env
+certs/
+data/

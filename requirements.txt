@@ -1,0 +1,19 @@
+# requirements.txt
+zeep # SOAP client for Python
+requests # HTTP library for Python
+pandas # Data manipulation and analysis library
+pydantic # Data validation and settings management using Python type annotations
+sqlalchemy # SQL toolkit and Object-Relational Mapping (ORM) system for Python
+psycopg2 # PostgreSQL adapter for Python
+uvicorn # ASGI server for running Python web applications               
+fastapi # Web framework for building APIs with Python 3.6+ based on standard Python type hints
+python-dotenv # Reads key-value pairs from a .env file and sets them as environment variables
+pytest # Testing framework for Python
+xsdata # Generates Python data classes from XML schemas (XSD)
+xsdata[cli] # Command-line interface for xsdata to generate models from XSD files
+requests
+tqdm # Fast, extensible progress bar for Python
+alembic # Database migration tool for SQLAlchemy
+python-dotenv 
+bs4 # Library for parsing HTML and XML documents
+lxml # Library for processing XML and HTML in Python

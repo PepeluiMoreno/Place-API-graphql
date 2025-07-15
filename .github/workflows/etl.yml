@@ -1,0 +1,51 @@
+# etl.yml
+# Fecha de creación: 2025-07-11 08:23:30
+# Ejecuta periódicamente los scripts ETL definidos para cargar datos desde el servicio PLACSP
+# Requiere variables de entorno: DB_URL, WSDL_URL, CERT_PEM, KEY_PEM
+
+name: Ejecutar ETL diaria
+
+on:
+  schedule:
+    - cron: "0 2 * * *"  # Cada día a las 02:00 UTC
+  workflow_dispatch:
+
+env:
+  DEBUG: "false"
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Crear archivos temporales de certificado
+        run: |
+          echo "$CERT_PEM" > cert.pem
+          echo "$KEY_PEM" > key.pem
+        env:
+          CERT_PEM: ${ secrets.CERT_PEM }
+          KEY_PEM: ${ secrets.KEY_PEM }
+
+      - name: Ejecutar carga de catálogos
+        run: |
+          python scripts/load_catalogos_from_service.py --wsdl ${ secrets.WSDL_URL } --cert cert.pem --key key.pem --dburl ${ secrets.DB_URL }
+
+      - name: Ejecutar carga de organismos
+        run: |
+          python scripts/load_organismos.py --wsdl ${ secrets.WSDL_URL } --cert cert.pem --key key.pem --dburl ${ secrets.DB_URL }
+
+      - name: Eliminar archivos de certificado
+        run: rm cert.pem key.pem
