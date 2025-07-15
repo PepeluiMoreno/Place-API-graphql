@@ -9,7 +9,7 @@
 
 Este proyecto implementa un pipeline ETL completo y una API GraphQL para explotar los datos ofrecidos por el servicio web [https://contrataciondelestado.es](https://contrataciondelestado.es). Incluye:
 
-- Extracción vía SOAP
+- Extracción vía sindicación (Atoms Feeds)
 - Transformación y almacenamiento intermedio en JSON
 - Carga a base de datos PostgreSQL (hospedada en [Neon](https://neon.tech))
 - Exposición vía API GraphQL con filtros básicos
@@ -52,7 +52,7 @@ place_api_graphql/
 
 ## ⚙️ Variables de Entorno
 
-Edita el archivo `.env` o usa `.env.example` como plantilla. Variables necesarias:
+Usa el archivo `.env.example` como plantilla para generar el `.env`. Variables necesarias:
 
 - `DATABASE_URL`: URL de conexión a PostgreSQL (Neon recomendado)
 
